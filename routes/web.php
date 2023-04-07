@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Models\Recette;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('', function () {
+    return view('index');
+});
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('accueil');
+});
+
+Route::get('liste', function () {
+    $recettes = Recette::get();
+    return view('liste_recettes',["recettes"=>$recettes]);
+   });
+
+   Route::get('recherche', function (Request $request) {
+    // -- Liste des livres (toutes les infos)
+    $recettes = Recette::where('titre','LIKE','%'.$request->trouve.'%');
+    return view('resultat_recherche', ["recettes"=>$recettes]);
 });

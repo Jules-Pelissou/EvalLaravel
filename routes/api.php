@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Get
+Route::get('recettes', [App\Http\Controllers\RecettesController::class, 'getSpeRecettes']);
+Route::delete('/recettes/{id}', [App\Http\Controllers\RecettesController::class, 'delete']);
+
+Route::put('/recettes/{id}', [App\Http\Controllers\RecettesController::class, 'modif']);
