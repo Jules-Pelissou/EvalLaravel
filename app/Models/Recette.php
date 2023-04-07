@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Recette extends Model
 {
     use HasFactory;
+
+    public $timestamps = FALSE;
+    public $incrementing = False;
 }

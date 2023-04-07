@@ -28,8 +28,24 @@ Route::get('liste', function () {
     return view('liste_recettes',["recettes"=>$recettes]);
    });
 
-   Route::get('recherche', function (Request $request) {
+Route::get('recherche', function (Request $request) {
     // -- Liste des livres (toutes les infos)
     $recettes = Recette::where('titre','LIKE','%'.$request->trouve.'%');
     return view('resultat_recherche', ["recettes"=>$recettes]);
+}
+);
+
+Route::get('ajouter', function(){
+    return view('ajout');
+});
+
+Route::post('ajout', function(Request $request){
+    $recettes = new Recette;
+    $recettes->titre = $request->titre;
+    $recettes->ingredients = $request->ingredients;
+    $recettes->duree = $request->duree;
+    $recettes->photo = $request->photo;
+
+    $recettes->save();
+    return view('accueil');
 });
